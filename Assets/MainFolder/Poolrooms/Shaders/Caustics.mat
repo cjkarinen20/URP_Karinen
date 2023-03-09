@@ -33,6 +33,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1790bfada4494c09834c36e88223a08e: 9.71
+    - Vector1_66bf4051ec234ca1aac8e544994b0f7f: 2
+    - _High: 5
+    - _Low: 1
+    - _VoronoiPower: 6
     - _VoronoiSize: 5
     - _VoronoiSpeed: 5
     m_Colors:
