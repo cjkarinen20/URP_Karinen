@@ -7,15 +7,18 @@ public class PlayerMovement : MonoBehaviour
     public GameObject mainCamera, rippleCamera;
     public CharacterController controller;
 
-    public ParticleSystem ripple; 
+    public ParticleSystem ripple;
 
+    public float facing;
     public float speed = 12f;
+
     public int rippleSpeed1, rippleSpeed2, rippleSpeed3;
     public float rippleSize1, rippleSize2, rippleSize3;
     public float rippleLifetime1, rippleLifetime2, rippleLifetime3;
 
 
     [SerializeField] private float velocityXZ, velocityY;
+    [SerializeField] private float mouseSensitivity = 1f;
 
     private Vector3 playerPos;
     
@@ -30,8 +33,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
+        facing += Input.GetAxis("Mouse X") * mouseSensitivity;
+
 
         Vector3 move = transform.right * x + transform.forward * z;
+        move = Quaternion.Euler(0f, facing, 0f) * move;
 
         controller.Move(move * speed * Time.deltaTime);
 
