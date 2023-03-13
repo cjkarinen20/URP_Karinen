@@ -55,15 +55,15 @@ Material:
     - Vector1_0f78c19a80494192a4e131700e2f845d: 5
     - Vector1_975e4fb7f45946b6a9562ca998e6e629: 1
     - Vector1_9b8ca9bcbfa744bc9f20c3ba5869daf3: 0
-    - _Depth: 15
-    - _DepthFade: 5
-    - _Foam: 0
+    - _Depth: 5
+    - _DepthFade: 14.53
+    - _Foam: 0.25
     - _FoamScale: 0.38
     - _Lerp: 0.116
     - _NormalStrength: 0.2
     - _ReflectionRefraction: 0.25
-    - _ReflectionStrength: 0.25
-    - _Refraction: 0
+    - _ReflectionStrength: 0.13
+    - _Refraction: 10
     - _RippleStrength: 1
     - _Smoothness: 0.263
     - _WaterLerp: 0.463
@@ -73,7 +73,7 @@ Material:
     m_Colors:
     - Color_9341d1752042467cbb1f079a16a65368: {r: 0.3646849, g: 0.9811321, b: 0.88229793, a: 1}
     - Vector3_3035352958164fd69a774263c7306848: {r: 0, g: 0, b: 0, a: 0}
-    - _Albedo: {r: 0.2443574, g: 0.9811321, b: 0.8163489, a: 0}
+    - _Albedo: {r: 0.28239584, g: 0.8962264, b: 0.75892216, a: 0.07058824}
     - _FoamColor: {r: 0.4660377, g: 1, b: 0.87418014, a: 0}
     - _Player: {r: 0, g: 0, b: 0, a: 0}
     - _UV1: {r: 3.29, g: 2.84, b: 2.74, a: 2}

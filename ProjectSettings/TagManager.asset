@@ -6,16 +6,20 @@ TagManager:
   tags:
   - Water
   - LevelObject
+  - PostProcess
+  - Light
+  - RippleCamera
+  - RippleSystem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Lighting
   - Water
   - UI
   - 
   - 
-  - 
+  - PostProcessing
   - Player
   - Ground
   - 

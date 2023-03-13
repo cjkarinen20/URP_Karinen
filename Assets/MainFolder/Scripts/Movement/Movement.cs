@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
 
     public MovementState state;
-    public enum MovementState
+    public enum MovementState //used to determine jumping, sprinting, air strafing and crouching
     {
         walking,
         sprinting,
@@ -78,10 +78,9 @@ public class Movement : MonoBehaviour
 
         readyToJump = true;
 
-        ResetJump();
+        ResetJump(); //applies cooldown and resets readyToJump to true
 
-        startYScale = transform.localScale.y;
-
+        startYScale = transform.localScale.y; //starting height of the player
     }
     private void Update()
     {
@@ -94,7 +93,7 @@ public class Movement : MonoBehaviour
 
         myInput();
         SpeedControl();
-        StateHandler();
+        StateHandler(); //changes the movement state
 
         velocityXZ = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(playerPos.x, 0, playerPos.z));
         velocityY = Vector3.Distance(new Vector3(0, transform.position.y, 0), new Vector3(0, playerPos.y, 0));
