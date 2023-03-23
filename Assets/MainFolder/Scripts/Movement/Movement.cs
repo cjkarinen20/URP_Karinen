@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
+    public float playerHeight;
     public Transform groundCheck;
     public float groundDistance = 0.2f;
     public LayerMask ground;
@@ -86,7 +87,7 @@ public class Movement : MonoBehaviour
     {
         //ground check
         grounded = Physics.CheckSphere(groundCheck.position, groundDistance, ground);
-        inWater = Physics.CheckSphere(groundCheck.position, groundDistance, water);
+        inWater = Physics.CheckSphere(groundCheck.position, playerHeight * 0.5f + 0.4f, water);
 
         Debug.Log("grounded: " + grounded);
         Debug.Log("inWater: " + inWater);

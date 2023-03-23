@@ -55,8 +55,8 @@ Material:
     - Vector1_0f78c19a80494192a4e131700e2f845d: 5
     - Vector1_975e4fb7f45946b6a9562ca998e6e629: 1
     - Vector1_9b8ca9bcbfa744bc9f20c3ba5869daf3: 0
-    - _Depth: 5
-    - _DepthFade: 14.53
+    - _Depth: 4.57
+    - _DepthFade: 22
     - _Foam: 0.25
     - _FoamScale: 0.38
     - _Lerp: 0.116
