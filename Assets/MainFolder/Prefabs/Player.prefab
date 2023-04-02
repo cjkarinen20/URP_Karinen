@@ -4815,6 +4815,8 @@ GameObject:
   - component: {fileID: 2488314072456868847}
   - component: {fileID: 2488314072456868841}
   - component: {fileID: 2488314072456868846}
+  - component: {fileID: 1619111891}
+  - component: {fileID: 1674738978910475453}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -4857,10 +4859,14 @@ MonoBehaviour:
   mainCamera: {fileID: 2488314072665325829}
   rippleCamera: {fileID: 2488314074139881629}
   ripple: {fileID: 2488314072162971627}
-  walkSpeed: 3.2
-  sprintSpeed: 5.2
-  groundDrag: 1
-  waterDrag: 4.2
+  walkSpeed: 5
+  sprintSpeed: 10
+  slideSpeed: 30
+  wallRunSpeed: 8.5
+  speedIncreaseMultiplier: 1.5
+  slopeIncreaseMultiplier: 2.5
+  groundDrag: 4
+  waterDrag: 8
   jumpForce: 5
   jumpCoolDown: 0.4
   airMultiplier: 2
@@ -4877,7 +4883,7 @@ MonoBehaviour:
   rippleLifetime3: 5
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 306
+  crouchKey: 99
   playerHeight: 1
   groundCheck: {fileID: 2488314074140488190}
   groundDistance: 1
@@ -4892,6 +4898,9 @@ MonoBehaviour:
   velocityXZ: 0
   velocityY: 0
   state: 0
+  sliding: 0
+  crouching: 0
+  wallRunning: 0
 --- !u!54 &2488314072456868846
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4908,6 +4917,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1619111891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488314072456868844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554a327816b78e44f82ad922a3de6c9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideYScale: 0.5
+  slideKey: 306
+  orientation: {fileID: 2488314073126732585}
+  playerObject: {fileID: 2488314073311489081}
+--- !u!114 &1674738978910475453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488314072456868844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad9f76e5a663104380d3c12261bdc0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 2048
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  wallRunForce: 200
+  wallClimbSpeed: 3
+  maxWallRunTime: 1.5
+  upwardsWallRun: 304
+  downwardsWallRun: 306
+  wallCheckDistance: 0.7
+  minJumpHeight: 1
+  orientation: {fileID: 2488314073126732585}
 --- !u!1 &2488314072665325829
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,7 +5027,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1077
+    m_Bits: 3125
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
