@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -55,14 +55,14 @@ Material:
     - Vector1_0f78c19a80494192a4e131700e2f845d: 5
     - Vector1_975e4fb7f45946b6a9562ca998e6e629: 1
     - Vector1_9b8ca9bcbfa744bc9f20c3ba5869daf3: 0
-    - _Depth: 4.57
-    - _DepthFade: 22
-    - _Foam: 0.25
-    - _FoamScale: 0.38
+    - _Depth: 0
+    - _DepthFade: 50
+    - _Foam: 0
+    - _FoamScale: 1.75
     - _Lerp: 0.116
     - _NormalStrength: 0.2
     - _ReflectionRefraction: 0.25
-    - _ReflectionStrength: 0.13
+    - _ReflectionStrength: 0
     - _Refraction: 10
     - _RippleStrength: 1
     - _Smoothness: 0.263

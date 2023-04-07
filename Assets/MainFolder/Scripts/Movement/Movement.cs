@@ -304,8 +304,9 @@ public class Movement : MonoBehaviour
         //in air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-        //prevent sliding while on slope
-        rb.useGravity = !OnSlope();
+
+        //prevents sliding while on slope by turning off gravity
+        if(wallRunning) rb.useGravity = !OnSlope();
     }
     private void SpeedControl()
     {

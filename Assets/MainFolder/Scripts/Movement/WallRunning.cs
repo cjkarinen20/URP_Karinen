@@ -8,11 +8,14 @@ public class WallRunning : MonoBehaviour
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
     public float wallRunForce;
+    public float wallJumpUpForce;
+    public float wallJumpSideForce;
     public float wallClimbSpeed;
     public float maxWallRunTime;
     private float wallRunTimer;
 
     [Header("Input")]
+    public KeyCode jumpKey = KeyCode.Space;
     public KeyCode upwardsWallRun = KeyCode.LeftShift;
     public KeyCode downwardsWallRun = KeyCode.LeftControl;
     private bool upwardsRunning;
@@ -28,8 +31,19 @@ public class WallRunning : MonoBehaviour
     private bool wallLeft;
     private bool wallRight;
 
+    [Header("Exiting")]
+    private bool exitingWall;
+    public float exitWallTime;
+    private float exitWallTimer;
+
+    [Header("Gravity")]
+    public bool useGravity;
+    public float gravityCounterForce;
+
+
     [Header("References")]
     public Transform orientation;
+    public CameraController cam;
     private Movement pm;
     private Rigidbody rb;
 
@@ -71,13 +85,43 @@ public class WallRunning : MonoBehaviour
 
 
         //state 1 - wallrunning
-        if((wallLeft || wallRight) && verticalInput > 0 && aboveGround())
+        if((wallLeft || wallRight) && verticalInput > 0 && aboveGround() && !exitingWall)
         {
             //start wallrun
             if (!pm.wallRunning)
                 startWallRun();
 
+            //wallrun timer
+            if (wallRunTimer > 0)
+                wallRunTimer -= Time.deltaTime;
+
+            if(wallRunTimer <= 0 && pm.wallRunning)
+            {
+                exitingWall = true;
+                exitWallTimer = exitWallTime;
+            }
+
+
+            //wall jump
+            if (Input.GetKeyDown(jumpKey)) 
+                wallJump();
+
+
         }
+
+        //state 2 - exiting wall
+        else if (exitingWall)
+        {
+            if (pm.wallRunning)
+                stopWallRun();
+
+            if (exitWallTimer > 0)
+                exitWallTimer -= Time.deltaTime;
+
+            if (exitWallTimer <= 0)
+                exitingWall = false;
+        }
+
         //state 3 - none
         else
         {
@@ -88,11 +132,15 @@ public class WallRunning : MonoBehaviour
     private void startWallRun()
     {
         pm.wallRunning = true;
+
+        wallRunTimer = maxWallRunTime;
+
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
     }
     private void WallRunningMovement()
     {
-        rb.useGravity = false;
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.useGravity = useGravity;
 
         Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
 
@@ -114,9 +162,28 @@ public class WallRunning : MonoBehaviour
         //push toward wall
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
             rb.AddForce(-wallNormal * 100, ForceMode.Force);
+
+        //weaken gravitational pull
+        if (useGravity)
+            rb.AddForce(transform.up * gravityCounterForce, ForceMode.Force);
     }
     private void stopWallRun()
     {
         pm.wallRunning = false;
+    }
+    private void wallJump()
+    {
+        //enter exitWall state
+        exitingWall = true;
+        exitWallTimer = exitWallTime;
+
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+
+        Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpUpForce;
+
+        //reset y velocity and add force
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+
     }
 }
